@@ -27,6 +27,10 @@ export class HomepageComponent implements OnInit {
   	});
 
   	this.allArtists =  [{name: "Akon", album: "Alone"}, {name: "Brown", album: "Someone"}];
+
+  	this.http.get("http://35.242.155.161/music).subscribe((data: any)=>{
+  		this.allArtists=data;
+  	});
   	
   	/*this.http.get("http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3fe8fa2085afbc2ef13f2b197c8192c").subscribe((data: any)=>{
   		console.log(data);
@@ -41,7 +45,7 @@ export class HomepageComponent implements OnInit {
 
   onSubmit(form: NgForm){
 	this.values = form.value;
-  	this.http.post("http://URL", this.values).subscribe((data: any)=>{
+  	this.http.post("http://35.242.155.161/music", this.values).subscribe((data: any)=>{
   		console.log(data);
   		this.values.id = data.id? data.id: 32;
   		this.allArtists.push(this.values);
@@ -50,16 +54,19 @@ export class HomepageComponent implements OnInit {
   	});
   }
 
-  edit(){
-  	this.http.put("http://URL/"+item.id, {item: item}).subscribe((data: any)=>{
+  edit(event, item){
+  	console.log(item);
+  	this.http.put("http://35.242.155.161/music"+item.id, {item: item}).subscribe((data: any)=>{
   		console.log(data);
   	});
   }
 
-  delete(){
-  	this.http.delete("http://URL/"+item.id, {item: item}).subscribe((data: any)=>{
-  		console.log(data);
-  	});
+  delete(event, item){
+  	if(item.id){
+	  	this.http.delete("http://35.242.155.161/music"+item.id).subscribe((data: any)=>{
+	  		console.log(data);
+	  	});
+	}
   }
 
   ngOnInit() {
