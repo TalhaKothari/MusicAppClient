@@ -1,0 +1,81 @@
+
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <p style="margin-bottom: 5px; margin-top: 5px;" *ngIf="success">Success!</p>
+      <button class="pull-right" style="margin-bottom: 5px; margin-top: 5px;" (click)="add($event)" *ngIf="!openBox">Add New</button>
+      <button class="pull-right" style="margin-bottom: 5px; margin-top: 5px;" (click)="add($event)" *ngIf="openBox">Cancel</button>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+  <div class="row" *ngIf="openBox">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          New Artist
+        </div>
+        <div class="panel-body">
+          <form name="form" class="form" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="row form-group">
+              <label for="nameInput" class="col-md-2 ng-binding required">Name</label>
+              <div class="col-md-5">
+                <input name="name" ngModel class="form-control input-sm" />
+              </div>
+            </div>
+            <div class="row form-group">
+              <label for="albumInput" class="col-md-2 ng-binding required">Album</label>
+              <div class="col-md-5">
+                <input name="album" ngModel class="form-control input-sm"/>
+              </div>
+            </div>
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div style="text-align: center;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 33%">Name</th>
+              <th style="width: 33%">Album</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allArtists" ng-class-even="table-striped" style="cursor:pointer" ng-click="selectSubs(item)">
+              <td>{{item.name}}</td>
+              <td>{{item.album}}</td>
+              <td>
+                <button type="button" class="btn btn-default btn-sm" style="width: 60px;" (click)="edit($event, item)" >Edit</button>
+                <button type="button" class="btn btn-default btn-sm" style="width: 60px;" (click)="delete($event, item)" >Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h3>Weather in London (External API)</h3>
+    <p>Weather Main: {{weather.weather[0].main}}</p>
+    <p>Weather Description: {{weather.weather[0].description}}</p>
+    <p>Humidity: {{weather.main.humidity}}</p>
+  </div>
+  <div class="col-md-2"></div>
+</div>
